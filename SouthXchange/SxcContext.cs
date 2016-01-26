@@ -275,7 +275,7 @@ namespace SouthXchange
         {
             if (string.IsNullOrEmpty(Key) || string.IsNullOrEmpty(Secret))
             {
-                throw new Exception("API Key or Secret have not been provided");
+                throw new SxcException("API Key or Secret have not been provided");
             }
 
             request = request ?? new Request();
