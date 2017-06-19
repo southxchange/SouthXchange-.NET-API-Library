@@ -16,13 +16,13 @@ namespace SouthXchange.Model
             /// Book entry total amount
             /// </summary>
             [JsonProperty("Amount")]
-            public string Amount { get; set; }
+            public decimal Amount { get; set; }
 
             /// <summary>
             /// Book entry price
             /// </summary>
             [JsonProperty("Price")]
-            public string Price { get; set; }
+            public decimal Price { get; set; }
         }
 
         /// <summary>
