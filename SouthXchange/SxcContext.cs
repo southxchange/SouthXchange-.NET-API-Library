@@ -249,6 +249,22 @@ namespace SouthXchange
             return await PostAsync<ListBalancesResult[]>("listBalances");
         }
 
+        /// <summary>
+        /// Lists transactions for specific currency. Permission required: List Balances
+        /// </summary>
+        /// <returns>Array of <typeparamref name="ListTransactionsResult"/></returns>
+        public async Task<PagedResult<ListTransactionsResult>> ListTransactionsAsync(string currency, int pageIndex, int pageSize, string sortField = "Date", bool descending = true)
+        {
+            return await PostAsync<PagedResult<ListTransactionsResult>>("listTransactions", new ListTransactionsRequest()
+            {
+                Currency = currency,
+                PageIndex = pageIndex,
+                PageSize = pageSize,
+                SortField = sortField,
+                Descending = descending
+            });
+        }
+
         #endregion
 
         #endregion
