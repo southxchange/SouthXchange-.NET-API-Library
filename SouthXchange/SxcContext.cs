@@ -12,11 +12,10 @@ namespace SouthXchange
     {
         #region Attributes
 
-        private Uri baseUri = new Uri("https://www.southxchange.com/api/");
-
-        private string Key;
-
-        private string Secret;
+        private string defaultUri = "https://www.southxchange.com/api/";
+        private Uri baseUri;
+        private string key;
+        private string secret;
 
         #endregion
 
@@ -24,12 +23,21 @@ namespace SouthXchange
 
         public SxcContext()
         {
+            this.baseUri = new Uri(defaultUri);
         }
 
         public SxcContext(string key, string secret)
         {
-            Key = key;
-            Secret = secret;
+            this.key = key;
+            this.secret = secret;
+            this.baseUri = new Uri(defaultUri);
+        }
+
+        public SxcContext(string key, string secret, string baseUrl)
+        {
+            this.key = key;
+            this.secret = secret;
+            baseUri = new Uri(baseUrl);
         }
 
         #endregion
@@ -289,20 +297,20 @@ namespace SouthXchange
 
         private async Task<T> PostAsync<T>(string relativeUri, Request request = null)
         {
-            if (string.IsNullOrEmpty(Key) || string.IsNullOrEmpty(Secret))
+            if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(secret))
             {
                 throw new SxcException("API Key or Secret have not been provided");
             }
 
             request = request ?? new Request();
-            request.Key = Key;
+            request.Key = key;
             request.Nonce = DateTime.UtcNow.Ticks;
 
             var jsonData = await Task.Factory.StartNew(
                 () => JsonConvert.SerializeObject(request));
 
             var client = new HttpClient();
-            client.DefaultRequestHeaders.Add("Hash", GetHash(jsonData, Secret));
+            client.DefaultRequestHeaders.Add("Hash", GetHash(jsonData, secret));
 
             var response = await client.PostAsync(
                 new Uri(baseUri, relativeUri),

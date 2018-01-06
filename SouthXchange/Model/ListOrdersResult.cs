@@ -28,6 +28,12 @@ namespace SouthXchange.Model
                     ? OrderType.Buy
                     : OrderType.Sell;
             }
+            set
+            {
+                TypeString = value == OrderType.Buy
+                    ? "buy"
+                    : "sell";
+            }
         }
 
         /// <summary>
