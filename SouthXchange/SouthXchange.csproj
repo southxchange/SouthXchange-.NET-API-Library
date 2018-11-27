@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\OrderRequest.cs" />
+    <Compile Include="Model\OrderResult.cs" />
     <Compile Include="Model\PagedRequest.cs" />
     <Compile Include="Model\SortedPagedRequest.cs" />
     <Compile Include="Model\PagedResult.cs" />

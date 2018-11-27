@@ -209,6 +209,20 @@ namespace SouthXchange
         }
 
         /// <summary>
+        /// Get order by order code. Permission required: List Orders
+        /// </summary>
+        /// <returns><typeparamref name="OrderResult"/></returns>
+        public async Task<OrderResult> GetOrderAsync(string code)
+        {
+            return await PostAsync<OrderResult>(
+                "getOrder",
+                new OrderRequest()
+                {
+                    Code = code
+                });
+        }
+
+        /// <summary>
         /// Generates a new address for a given cryptocurrency. Permission required: Generate New Address
         /// </summary>
         /// <param name="currency">Currency for which a new address will be generated</param>
