@@ -59,6 +59,7 @@
     <Compile Include="Model\OrderType.cs" />
     <Compile Include="Model\SxcModel.cs" />
     <Compile Include="Model\ListTransactionsRequest.cs" />
+    <Compile Include="Model\WithdrawResult.cs" />
     <Compile Include="Model\WithdrawRequest.cs" />
     <Compile Include="Model\CancelMarketOrdersRequest.cs" />
     <Compile Include="Model\Request.cs" />

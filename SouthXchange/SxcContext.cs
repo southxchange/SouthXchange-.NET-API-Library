@@ -241,9 +241,10 @@ namespace SouthXchange
         /// Withdraws to a given address. Permission required: Withdraw
         /// </summary>
         /// <param name="withdrawRequest">Instance of <typeparamref name="WithdrawRequest"/></param>
-        public async Task WithdrawAsync(WithdrawRequest withdrawRequest)
+        /// <returns><typeparamref name="WithdrawResult"/></returns>
+        public async Task<WithdrawResult> WithdrawAsync(WithdrawRequest withdrawRequest)
         {
-            await PostAsync<string>("withdraw", withdrawRequest);
+            return await PostAsync<WithdrawResult>("withdraw", withdrawRequest);
         }
 
         /// <summary>
@@ -252,9 +253,10 @@ namespace SouthXchange
         /// <param name="currency">Currency code to withdraw</param>
         /// <param name="address">Destination address</param>
         /// <param name="amount">Amount to withdraw. Destination address will receive this amount minus fees</param>
-        public async Task WithdrawAsync(string currency, string address, decimal amount)
+        /// <returns><typeparamref name="WithdrawResult"/></returns>
+        public async Task<WithdrawResult> WithdrawAsync(string currency, string address, decimal amount)
         {
-            await WithdrawAsync(new WithdrawRequest()
+            return await WithdrawAsync(new WithdrawRequest()
             {
                 Currency = currency,
                 Address = address,
