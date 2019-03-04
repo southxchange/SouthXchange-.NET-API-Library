@@ -158,6 +158,7 @@ namespace SouthXchange
                 ReferenceCurrency = referenceCurrency,
                 Type = type,
                 Amount = amount,
+                AmountInReferenceCurrency = false,
                 LimitPrice = limitPrice
             });
         }

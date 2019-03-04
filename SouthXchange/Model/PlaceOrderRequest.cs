@@ -37,10 +37,17 @@ namespace SouthXchange.Model
         }
 
         /// <summary>
-        /// Order amount in listing currency
+        /// Order amount
         /// </summary>
         [JsonProperty("amount")]
         public decimal Amount { get; set; }
+
+        /// <summary>
+        /// Specifies whether Amount is in reference currency.
+        /// Default value: false. Amount is sent in listing currency.
+        /// </summary>
+        [JsonProperty("amountInReferenceCurrency")]
+        public bool AmountInReferenceCurrency { get; set; }
 
         /// <summary>
         /// Optional price in reference currency. If null then order is executed at market price
