@@ -12,6 +12,12 @@ namespace SouthXchange.Model
         public DateTime Date { get; set; }
 
         /// <summary>
+        /// Currency code
+        /// </summary>
+        [JsonProperty("currencyCode")]
+        public string CurrencyCode { get; set; }
+
+        /// <summary>
         /// Amount
         /// </summary>
         [JsonProperty("amount")]

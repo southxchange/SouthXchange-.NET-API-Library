@@ -290,6 +290,15 @@ namespace SouthXchange
             });
         }
 
+        /// <summary>
+        /// Lists transactions for specific currency. Permission required: List Balances
+        /// </summary>
+        /// <returns>Array of <typeparamref name="ListTransactionsResult"/></returns>
+        public async Task<PagedResult<ListTransactionsResult>> ListTransactionsAsync(ListTransactionsRequest listTransactionsRequest)
+        {
+            return await PostAsync<PagedResult<ListTransactionsResult>>("listTransactions", listTransactionsRequest);
+        }
+
         #endregion
 
         #endregion

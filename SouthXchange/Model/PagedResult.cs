@@ -7,7 +7,7 @@ namespace SouthXchange.Model
         /// <summary>
         /// Query total results
         /// </summary>
-        [JsonProperty("TotalResults")]
+        [JsonProperty("TotalElements")]
         public int TotalResults { get; set; }
 
         /// <summary>
