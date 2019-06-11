@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\HistoryRequest.cs" />
+    <Compile Include="Model\ListAddressesRequest.cs" />
+    <Compile Include="Model\HistoryResult.cs" />
     <Compile Include="Model\OrderRequest.cs" />
     <Compile Include="Model\OrderResult.cs" />
     <Compile Include="Model\PagedRequest.cs" />

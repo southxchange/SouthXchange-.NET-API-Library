@@ -122,6 +122,23 @@ namespace SouthXchange
                    referenceCurrency));
         }
 
+        /// <summary>
+        /// Lists history of a specific market between two dates
+        /// </summary>
+        /// <returns>
+        /// Array of <typeparamref name="HistoryResult"/>
+        /// </returns>
+        public async Task<HistoryResult[]> GetHistory(HistoryRequest historyRequest)
+        {
+            return await GetAsync<HistoryResult[]>(
+                string.Format("history/{0}/{1}/{2}/{3}/{4}",
+                historyRequest.ListingCurrency,
+                historyRequest.ReferenceCurrency,
+                historyRequest.StartJs,
+                historyRequest.EndJs,
+                historyRequest.Periods?.ToString() ?? string.Empty));
+        }
+
         #endregion
 
         #region Private API
@@ -239,6 +256,32 @@ namespace SouthXchange
         }
 
         /// <summary>
+        /// Lists addresses for a specific currency. Permission required: Generate New Address
+        /// </summary>
+        /// <param name="currency">Currency for which the list of addresses will be returned</param>
+        /// <param name="pageIndex">The page index</param>
+        /// <param name="pageSize">The page size</param>
+        /// <returns><typeparamref name="PagedResult"/> of addresses</returns>
+        public async Task<PagedResult<string>> ListAddresses(string currency, int pageIndex, int pageSize)
+        {
+            return await ListAddresses(new ListAddressesRequest()
+            {
+                Currency = currency,
+                PageIndex = pageIndex,
+                PageSize = pageSize
+            });
+        }
+
+        /// <summary>
+        /// Lists addresses for a specific currency. Permission required: Generate New Address
+        /// </summary>
+        /// <returns><typeparamref name="PagedResult"/> of addresses</returns>
+        public async Task<PagedResult<string>> ListAddresses(ListAddressesRequest listAddressesRequest)
+        {
+            return await PostAsync<PagedResult<string>>("listaddresses", listAddressesRequest);
+        }
+
+        /// <summary>
         /// Withdraws to a given address. Permission required: Withdraw
         /// </summary>
         /// <param name="withdrawRequest">Instance of <typeparamref name="WithdrawRequest"/></param>
@@ -277,7 +320,7 @@ namespace SouthXchange
         /// <summary>
         /// Lists transactions for specific currency. Permission required: List Balances
         /// </summary>
-        /// <returns>Array of <typeparamref name="ListTransactionsResult"/></returns>
+        /// <returns><typeparamref name="PagedResult"/> of <typeparamref name="ListTransactionsResult"/></returns>
         public async Task<PagedResult<ListTransactionsResult>> ListTransactionsAsync(string currency, int pageIndex, int pageSize, string sortField = "Date", bool descending = true)
         {
             return await PostAsync<PagedResult<ListTransactionsResult>>("listTransactions", new ListTransactionsRequest()
@@ -288,6 +331,15 @@ namespace SouthXchange
                 SortField = sortField,
                 Descending = descending
             });
+        }
+
+        /// <summary>
+        /// Lists transactions for all currencies. Permission required: List Balances
+        /// </summary>
+        /// <returns>Array of <typeparamref name="ListTransactionsResult"/></returns>
+        public async Task<PagedResult<ListTransactionsResult>> ListTransactionsAsync(int pageIndex, int pageSize, string sortField = "Date", bool descending = true)
+        {
+            return await ListTransactionsAsync(string.Empty, pageIndex, pageSize, sortField, descending);
         }
 
         /// <summary>
