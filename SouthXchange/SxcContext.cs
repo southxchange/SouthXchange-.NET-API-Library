@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using SouthXchange.Model;
 using System;
+using System.Linq;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
@@ -12,7 +13,7 @@ namespace SouthXchange
     {
         #region Attributes
 
-        private string defaultUri = "https://www.southxchange.com/api/";
+        private string defaultUri = "https://www.southxchange.com/api/v2/";
         private Uri baseUri;
         private string key;
         private string secret;
@@ -23,14 +24,16 @@ namespace SouthXchange
 
         public SxcContext()
         {
-            this.baseUri = new Uri(defaultUri);
+            baseUri = new Uri(defaultUri);
+            RealTimeContext = new RealTimeContext(baseUri);
         }
 
         public SxcContext(string key, string secret)
         {
             this.key = key;
             this.secret = secret;
-            this.baseUri = new Uri(defaultUri);
+            baseUri = new Uri(defaultUri);
+            RealTimeContext = new RealTimeContext(baseUri);
         }
 
         public SxcContext(string key, string secret, string baseUrl)
@@ -38,7 +41,14 @@ namespace SouthXchange
             this.key = key;
             this.secret = secret;
             baseUri = new Uri(baseUrl);
+            RealTimeContext = new RealTimeContext(baseUri);
         }
+
+        #endregion
+
+        #region Properties
+
+        public RealTimeContext RealTimeContext { get; private set; }
 
         #endregion
 
@@ -50,13 +60,18 @@ namespace SouthXchange
         /// Lists all markets
         /// </summary>
         /// <returns>
-        /// Array of array.
-        /// Index 0: listing currency code.
-        /// Index 1: reference currency code.
+        /// Array of <typeparamref name="MarketResult"/>.
         /// </returns>
-        public async Task<string[][]> GetMarketsAsync()
+        public async Task<MarketResult[]> GetMarketsAsync()
         {
-            return await GetAsync<string[][]>("markets");
+            return (await GetAsync<string[][]>("markets"))
+                .Select(m => new MarketResult()
+                {
+                    ListingCurrency = m[0],
+                    ReferenceCurrency = m[1],
+                    MarketId = int.Parse(m[2])
+                })
+                .ToArray();
         }
 
         /// <summary>

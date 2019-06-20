@@ -47,6 +47,11 @@
     <Compile Include="Model\HistoryRequest.cs" />
     <Compile Include="Model\ListAddressesRequest.cs" />
     <Compile Include="Model\HistoryResult.cs" />
+    <Compile Include="Model\MarketResult.cs" />
+    <Compile Include="Model\Messages\BookDeltaItem.cs" />
+    <Compile Include="Model\Messages\BookItem.cs" />
+    <Compile Include="Model\Messages\MarketBook.cs" />
+    <Compile Include="Model\Messages\Trade.cs" />
     <Compile Include="Model\OrderRequest.cs" />
     <Compile Include="Model\OrderResult.cs" />
     <Compile Include="Model\PagedRequest.cs" />
@@ -69,12 +74,14 @@
     <Compile Include="Model\PlaceOrderRequest.cs" />
     <Compile Include="Model\ListBalancesResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RealTimeContext.cs" />
     <Compile Include="SxcContext.cs" />
     <Compile Include="SxcException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
