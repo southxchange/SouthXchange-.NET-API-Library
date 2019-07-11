@@ -82,5 +82,11 @@ namespace SouthXchange.Model
         /// </summary>
         [JsonProperty("tradeId")]
         public string TradeId { get; set; }
+
+        /// <summary>
+        /// movementId
+        /// </summary>
+        [JsonProperty("movementId")]
+        public string MovementId { get; set; }
     }
 }
