@@ -73,6 +73,11 @@ namespace Examples
 
             // Withdraw
             await context.WithdrawAsync("LTC", address, limxBalance.Available);
+
+            // get LN Invoice
+            var invoice = await context.GetLNInvoiceAsync("LTC", (decimal)0.01);
+            Console.WriteLine(invoice);
+
         }
 
         private void InitializeWebSockets(SxcContext context)

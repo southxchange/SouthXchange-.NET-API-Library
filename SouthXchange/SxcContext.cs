@@ -209,6 +209,17 @@ namespace SouthXchange
                 });
         }
 
+        public async Task<string> GetLNInvoiceAsync(string currency, decimal amount)
+        {
+            return await PostAsync<string>(
+                "GetLNInvoice",
+                new GetLNInvoiceRequest()
+                {
+                    Currency = currency,
+                    Amount = amount
+                });
+        }
+
         /// <summary>
         /// Cancels all orders in a given market. Permission required: Cancel Order
         /// </summary>
@@ -404,10 +415,10 @@ namespace SouthXchange
 
             var client = new HttpClient();
             client.DefaultRequestHeaders.Add("Hash", GetHash(jsonData, secret));
-
-            var response = await client.PostAsync(
-                new Uri(baseUri, relativeUri),
-                new StringContent(jsonData, Encoding.ASCII, "application/json"));
+            
+            var uri = new Uri(baseUri, relativeUri);
+            var stringContent = new StringContent(jsonData, Encoding.ASCII, "application/json");
+            var response = await client.PostAsync(uri, stringContent);
 
             if (!response.IsSuccessStatusCode)
             {
