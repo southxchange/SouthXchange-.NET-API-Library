@@ -415,10 +415,10 @@ namespace SouthXchange
 
             var client = new HttpClient();
             client.DefaultRequestHeaders.Add("Hash", GetHash(jsonData, secret));
-            
-            var uri = new Uri(baseUri, relativeUri);
-            var stringContent = new StringContent(jsonData, Encoding.ASCII, "application/json");
-            var response = await client.PostAsync(uri, stringContent);
+
+            var response = await client.PostAsync(
+                new Uri(baseUri, relativeUri),
+                new StringContent(jsonData, Encoding.ASCII, "application/json"));
 
             if (!response.IsSuccessStatusCode)
             {
