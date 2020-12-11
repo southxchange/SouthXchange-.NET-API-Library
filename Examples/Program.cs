@@ -35,44 +35,49 @@ namespace Examples
             // List balances
             var listBalancesResult = await context.ListBalancesAsync();
             var limxBalance = listBalancesResult.First(r => r.Currency == "LTC");
-
+            
             if (limxBalance == null)
             {
                 throw new Exception("No LTC balance");
             }
-
+            
             Console.WriteLine(limxBalance);
-
+            
             // Place order
             var orderCode = await context.PlaceOrderAsync(
                 "LTC", "BTC",
                 SouthXchange.Model.OrderType.Sell,
                 limxBalance.Available,
                 (decimal)99999);
-
+            
             Console.WriteLine(orderCode);
-
+            
             // List orders
             var listOrdersResult = await context.ListOrdersAsync();
             var order = listOrdersResult.First(r => r.Code == orderCode);
-
+            
             if (order == null)
             {
                 throw new Exception("Order not found");
             }
-
+            
             Console.WriteLine(order);
-
+            
             // Cancel order
             await context.CancelOrderAsync(orderCode);
-
+            
             // Generate new address
             var address = await context.GenerateNewAddressAsync("LTC");
-
+            
             Console.WriteLine(address);
-
+            
             // Withdraw
             await context.WithdrawAsync("LTC", address, limxBalance.Available);
+
+            // get LN Invoice
+            var invoice = await context.GetLNInvoiceAsync("LTC", (decimal)0.01);
+            Console.WriteLine(invoice);
+
         }
 
         private void InitializeWebSockets(SxcContext context)

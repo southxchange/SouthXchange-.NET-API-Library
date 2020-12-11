@@ -209,6 +209,17 @@ namespace SouthXchange
                 });
         }
 
+        public async Task<string> GetLNInvoiceAsync(string currency, decimal amount)
+        {
+            return await PostAsync<string>(
+                "GetLNInvoice",
+                new GetLNInvoiceRequest()
+                {
+                    Currency = currency,
+                    Amount = amount
+                });
+        }
+
         /// <summary>
         /// Cancels all orders in a given market. Permission required: Cancel Order
         /// </summary>
