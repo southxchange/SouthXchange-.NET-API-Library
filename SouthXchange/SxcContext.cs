@@ -329,7 +329,8 @@ namespace SouthXchange
             return await WithdrawAsync(new WithdrawRequest()
             {
                 Currency = currency,
-                Address = address,
+                Destination = address,
+                DestinationType = DestinationType.CryptoAddress,
                 Amount = amount
             });
         }

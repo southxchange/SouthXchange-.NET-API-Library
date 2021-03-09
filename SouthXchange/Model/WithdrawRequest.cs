@@ -14,7 +14,7 @@ namespace SouthXchange.Model
         /// The withdraw destination address
         /// </summary>
         [JsonProperty("destination")]
-        public string destination { get; set; }
+        public string Destination { get; set; }
 
         /// <summary>
         /// 0: Crypto address
@@ -22,7 +22,7 @@ namespace SouthXchange.Model
         /// 2: SouthXchange user email address
         /// </summary>
         [JsonProperty("destinationType")]
-        public int destinationType { get; set; }
+        public DestinationType DestinationType { get; set; }
 
         /// <summary>
         /// Amount to withdraw. Destination address will receive this amount minus fees
