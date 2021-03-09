@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\UserInfo.cs" />
     <Compile Include="Model\GetLNInvoiceRequest.cs" />
     <Compile Include="Model\HistoryRequest.cs" />
     <Compile Include="Model\ListAddressesRequest.cs" />

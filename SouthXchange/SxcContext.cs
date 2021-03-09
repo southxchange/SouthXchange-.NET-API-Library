@@ -13,7 +13,7 @@ namespace SouthXchange
     {
         #region Attributes
 
-        private string defaultUri = "https://www.southxchange.com/api/v2/";
+        private string defaultUri = "https://www.southxchange.com/api/v3/";
         private Uri baseUri;
         private string key;
         private string secret;
@@ -375,6 +375,17 @@ namespace SouthXchange
         public async Task<PagedResult<ListTransactionsResult>> ListTransactionsAsync(ListTransactionsRequest listTransactionsRequest)
         {
             return await PostAsync<PagedResult<ListTransactionsResult>>("listTransactions", listTransactionsRequest);
+        }
+
+        /// <summary>
+        /// Gets user information. Permission required: Get info
+        /// </summary>
+        /// <returns>
+        /// Instance of <typeparamref name="UserInfo"/>
+        /// </returns>
+        public async Task<UserInfo> GetUserInfoAsync()
+        {
+            return await PostAsync<UserInfo>("getUserInfo");
         }
 
         #endregion

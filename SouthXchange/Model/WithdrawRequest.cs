@@ -11,10 +11,18 @@ namespace SouthXchange.Model
         public string Currency { get; set; }
 
         /// <summary>
-        /// Destination address
+        /// The withdraw destination address
         /// </summary>
-        [JsonProperty("address")]
-        public string Address { get; set; }
+        [JsonProperty("destination")]
+        public string destination { get; set; }
+
+        /// <summary>
+        /// 0: Crypto address
+        /// 1: Lightning Network invoice
+        /// 2: SouthXchange user email address
+        /// </summary>
+        [JsonProperty("destinationType")]
+        public int destinationType { get; set; }
 
         /// <summary>
         /// Amount to withdraw. Destination address will receive this amount minus fees
