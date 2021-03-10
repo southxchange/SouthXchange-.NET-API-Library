@@ -3,7 +3,7 @@
     public enum DestinationType
     {
         CryptoAddress = 0,
-        LightningNetworkinvoice = 1,
-        SouthXchangeUserEmail = 2,
+        LightningNetworkInvoice = 1,
+        UserEmailAddress = 2,
     }
 }

@@ -44,6 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\FeesReult.cs" />
+    <Compile Include="Model\TraderLevelModel.cs" />
+    <Compile Include="Model\MarketModel.cs" />
+    <Compile Include="Model\CurrencyModel.cs" />
+    <Compile Include="Model\DestinationType.cs" />
     <Compile Include="Model\UserInfo.cs" />
     <Compile Include="Model\GetLNInvoiceRequest.cs" />
     <Compile Include="Model\HistoryRequest.cs" />

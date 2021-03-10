@@ -154,6 +154,17 @@ namespace SouthXchange
                 historyRequest.Periods?.ToString() ?? string.Empty));
         }
 
+        /// <summary>
+        /// Gives information about feed, listed by currency, market and trader level
+        /// </summary>
+        /// <returns>
+        /// <typeparamref name="FeesResult"/>
+        /// </returns>
+        public async Task<FeesResult> GetFees()
+        {
+            return await GetAsync<FeesResult>("fees");
+        }
+
         #endregion
 
         #region Private API
@@ -324,13 +335,13 @@ namespace SouthXchange
         /// <param name="address">Destination address</param>
         /// <param name="amount">Amount to withdraw. Destination address will receive this amount minus fees</param>
         /// <returns><typeparamref name="WithdrawResult"/></returns>
-        public async Task<WithdrawResult> WithdrawAsync(string currency, string address, decimal amount)
+        public async Task<WithdrawResult> WithdrawAsync(string currency, string destination, DestinationType destinationType, decimal amount)
         {
             return await WithdrawAsync(new WithdrawRequest()
             {
                 Currency = currency,
-                Destination = address,
-                DestinationType = DestinationType.CryptoAddress,
+                Destination = destination,
+                DestinationType = destinationType,
                 Amount = amount
             });
         }

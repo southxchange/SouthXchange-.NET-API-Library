@@ -72,7 +72,7 @@ namespace Examples
             Console.WriteLine(address);
             
             // Withdraw
-            await context.WithdrawAsync("LTC", address, limxBalance.Available);
+            await context.WithdrawAsync("LTC", address, SouthXchange.Model.DestinationType.CryptoAddress, limxBalance.Available);
 
             // get LN Invoice
             var invoice = await context.GetLNInvoiceAsync("LTC", (decimal)0.01);
