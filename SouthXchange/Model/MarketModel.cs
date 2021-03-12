@@ -32,6 +32,6 @@ namespace SouthXchange.Model
         /// Minimum order amount (in listing currency)
         /// </summary>
         [JsonProperty("minOrderListingCurrency")]
-        public decimal MinOrderListingCurrency { get; set; }
+        public decimal? MinOrderListingCurrency { get; set; }
     }
 }

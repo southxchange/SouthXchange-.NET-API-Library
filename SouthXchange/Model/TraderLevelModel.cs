@@ -20,7 +20,7 @@ namespace SouthXchange.Model
         /// Minimum volume amount currency
         /// </summary>
         [JsonProperty("minVolumeCurrency")]
-        public decimal MinVolumeCurrency { get; set; }
+        public string MinVolumeCurrency { get; set; }
 
         /// <summary>
         /// Maker orders trading fee rebate

@@ -3,6 +3,7 @@ using SouthXchange.Model;
 using System;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -335,6 +336,31 @@ namespace SouthXchange
         /// <param name="address">Destination address</param>
         /// <param name="amount">Amount to withdraw. Destination address will receive this amount minus fees</param>
         /// <returns><typeparamref name="WithdrawResult"/></returns>
+        public async Task<WithdrawResult> WithdrawAsync(string currency, string address, decimal amount)
+        {
+            return await WithdrawAsync(new WithdrawRequest()
+            {
+                Currency = currency,
+                Destination = address,
+                DestinationType = IsEmail(address) 
+                    ? DestinationType.UserEmailAddress
+                    : DestinationType.CryptoAddress,
+                Amount = amount
+            });
+        }
+
+        /// <summary>
+        /// Withdraws to a given address. Permission required: Withdraw
+        /// </summary>
+        /// <param name="currency">Currency code to withdraw</param>
+        /// <param name="destination">The withdraw destination address</param>
+        /// <param name="destinationType">The withdraw destination type.
+        /// 0: Crypto address
+        /// 1: Lightning Network invoice
+        /// 2: SouthXchange user email address
+        /// </param>
+        /// <param name="amount">Amount to withdraw. Destination address will receive this amount minus fees</param>
+        /// <returns><typeparamref name="WithdrawResult"/></returns>
         public async Task<WithdrawResult> WithdrawAsync(string currency, string destination, DestinationType destinationType, decimal amount)
         {
             return await WithdrawAsync(new WithdrawRequest()
@@ -459,6 +485,19 @@ namespace SouthXchange
             HMACSHA512 hash = new HMACSHA512(Encoding.UTF8.GetBytes(secret));
             byte[] bytes = hash.ComputeHash(Encoding.UTF8.GetBytes(input));
             return BitConverter.ToString(bytes).Replace("-", "").ToLower();
+        }
+
+        private static bool IsEmail(string address)
+        {
+            try
+            {
+                new MailAddress(address);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         #endregion
