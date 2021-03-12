@@ -2,15 +2,15 @@
 <package >
   <metadata>
     <id>PRO-Systems.SouthXchange.API</id>
-    <version>1.0.12</version>
+    <version>1.0.13</version>
     <authors>PRO-Systems</authors>
     <owners>PRO-Systems</owners>
-    <projectUrl>https://www.southxchange.com/Home/Api</projectUrl>
+    <projectUrl>https://main.southxchange.com/Content/swagger/ui/?urls.primaryName=API%20v3</projectUrl>
     <iconUrl>https://www.southxchange.com/favicon.ico</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>SouthXchange API Library</description>
     <releaseNotes></releaseNotes>
-    <copyright>Copyright 2019</copyright>
+    <copyright>Copyright 2021</copyright>
     <tags></tags>
   </metadata>
 </package>
