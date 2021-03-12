@@ -3,6 +3,7 @@ using SouthXchange.Model;
 using System;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace SouthXchange
     {
         #region Attributes
 
-        private string defaultUri = "https://www.southxchange.com/api/v2/";
+        private string defaultUri = "https://www.southxchange.com/api/v3/";
         private Uri baseUri;
         private string key;
         private string secret;
@@ -152,6 +153,17 @@ namespace SouthXchange
                 historyRequest.StartJs,
                 historyRequest.EndJs,
                 historyRequest.Periods?.ToString() ?? string.Empty));
+        }
+
+        /// <summary>
+        /// Gives information about feed, listed by currency, market and trader level
+        /// </summary>
+        /// <returns>
+        /// <typeparamref name="FeesResult"/>
+        /// </returns>
+        public async Task<FeesResult> GetFees()
+        {
+            return await GetAsync<FeesResult>("fees");
         }
 
         #endregion
@@ -329,7 +341,33 @@ namespace SouthXchange
             return await WithdrawAsync(new WithdrawRequest()
             {
                 Currency = currency,
-                Address = address,
+                Destination = address,
+                DestinationType = IsEmail(address) 
+                    ? DestinationType.UserEmailAddress
+                    : DestinationType.CryptoAddress,
+                Amount = amount
+            });
+        }
+
+        /// <summary>
+        /// Withdraws to a given address. Permission required: Withdraw
+        /// </summary>
+        /// <param name="currency">Currency code to withdraw</param>
+        /// <param name="destination">The withdraw destination address</param>
+        /// <param name="destinationType">The withdraw destination type.
+        /// 0: Crypto address
+        /// 1: Lightning Network invoice
+        /// 2: SouthXchange user email address
+        /// </param>
+        /// <param name="amount">Amount to withdraw. Destination address will receive this amount minus fees</param>
+        /// <returns><typeparamref name="WithdrawResult"/></returns>
+        public async Task<WithdrawResult> WithdrawAsync(string currency, string destination, DestinationType destinationType, decimal amount)
+        {
+            return await WithdrawAsync(new WithdrawRequest()
+            {
+                Currency = currency,
+                Destination = destination,
+                DestinationType = destinationType,
                 Amount = amount
             });
         }
@@ -375,6 +413,17 @@ namespace SouthXchange
         public async Task<PagedResult<ListTransactionsResult>> ListTransactionsAsync(ListTransactionsRequest listTransactionsRequest)
         {
             return await PostAsync<PagedResult<ListTransactionsResult>>("listTransactions", listTransactionsRequest);
+        }
+
+        /// <summary>
+        /// Gets user information. Permission required: Get info
+        /// </summary>
+        /// <returns>
+        /// Instance of <typeparamref name="UserInfo"/>
+        /// </returns>
+        public async Task<UserInfo> GetUserInfoAsync()
+        {
+            return await PostAsync<UserInfo>("getUserInfo");
         }
 
         #endregion
@@ -436,6 +485,19 @@ namespace SouthXchange
             HMACSHA512 hash = new HMACSHA512(Encoding.UTF8.GetBytes(secret));
             byte[] bytes = hash.ComputeHash(Encoding.UTF8.GetBytes(input));
             return BitConverter.ToString(bytes).Replace("-", "").ToLower();
+        }
+
+        private static bool IsEmail(string address)
+        {
+            try
+            {
+                new MailAddress(address);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         #endregion

@@ -1,4 +1,5 @@
 ﻿using SouthXchange;
+using SouthXchange.Model;
 using System;
 using System.Linq;
 using System.Threading;
@@ -16,7 +17,7 @@ namespace Examples
 
         private async Task RunAsync()
         {
-            var context = new SxcContext("Your_API_Key", "Your_API_Secret");
+            var context = new SxcContext("YOUR_API_KEY", "YOUR_API_SECRET");
 
             try
             {
@@ -32,23 +33,26 @@ namespace Examples
 
         private async Task TryPrivateAPI(SxcContext  context)
         {
+            var currency = "BTC";
+            var marketCurrency = "USD";
+
             // List balances
             var listBalancesResult = await context.ListBalancesAsync();
-            var limxBalance = listBalancesResult.First(r => r.Currency == "LTC");
+            var currencyBalance = listBalancesResult.First(r => r.Currency == currency);
             
-            if (limxBalance == null)
+            if (currencyBalance == null)
             {
-                throw new Exception("No LTC balance");
+                throw new Exception($"No {currency} balance");
             }
             
-            Console.WriteLine(limxBalance);
+            Console.WriteLine(currencyBalance);
             
             // Place order
             var orderCode = await context.PlaceOrderAsync(
-                "LTC", "BTC",
-                SouthXchange.Model.OrderType.Sell,
-                limxBalance.Available,
-                (decimal)99999);
+                currency, marketCurrency,
+                OrderType.Sell,
+                (decimal)0.00000001,
+                1000000);
             
             Console.WriteLine(orderCode);
             
@@ -67,17 +71,16 @@ namespace Examples
             await context.CancelOrderAsync(orderCode);
             
             // Generate new address
-            var address = await context.GenerateNewAddressAsync("LTC");
+            var address = await context.GenerateNewAddressAsync(currency);
             
             Console.WriteLine(address);
             
             // Withdraw
-            await context.WithdrawAsync("LTC", address, limxBalance.Available);
+            // await context.WithdrawAsync(currency, address, DestinationType.CryptoAddress, currencyBalance.Available);
 
             // get LN Invoice
-            var invoice = await context.GetLNInvoiceAsync("LTC", (decimal)0.01);
+            var invoice = await context.GetLNInvoiceAsync(currency, (decimal)0.01);
             Console.WriteLine(invoice);
-
         }
 
         private void InitializeWebSockets(SxcContext context)
