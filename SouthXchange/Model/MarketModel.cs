@@ -33,5 +33,11 @@ namespace SouthXchange.Model
         /// </summary>
         [JsonProperty("minOrderListingCurrency")]
         public decimal? MinOrderListingCurrency { get; set; }
+
+        /// <summary>
+        /// The price precision
+        /// </summary>
+        [JsonProperty("pricePrecision")]
+        public byte PricePrecision { get; set; }
     }
 }
