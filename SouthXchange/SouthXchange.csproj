@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\FeesResult.cs" />
+    <Compile Include="Model\AddressModel.cs" />
     <Compile Include="Model\TraderLevelModel.cs" />
     <Compile Include="Model\MarketModel.cs" />
     <Compile Include="Model\CurrencyModel.cs" />

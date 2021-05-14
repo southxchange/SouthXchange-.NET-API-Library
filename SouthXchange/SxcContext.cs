@@ -14,7 +14,7 @@ namespace SouthXchange
     {
         #region Attributes
 
-        private string defaultUri = "https://www.southxchange.com/api/v3/";
+        private string defaultUri = "https://www.southxchange.com/api/v4/";
         private Uri baseUri;
         private string key;
         private string secret;
@@ -283,9 +283,9 @@ namespace SouthXchange
         /// </summary>
         /// <param name="currency">Currency for which a new address will be generated</param>
         /// <returns>Generated address</returns>
-        public async Task<string> GenerateNewAddressAsync(string currency)
+        public async Task<AddressModel> GenerateNewAddressAsync(string currency)
         {
-            return await PostAsync<string>(
+            return await PostAsync<AddressModel>(
                 "generateNewAddress",
                 new GenerateNewAddressRequest()
                 {
@@ -300,7 +300,7 @@ namespace SouthXchange
         /// <param name="pageIndex">The page index</param>
         /// <param name="pageSize">The page size</param>
         /// <returns><typeparamref name="PagedResult"/> of addresses</returns>
-        public async Task<PagedResult<string>> ListAddresses(string currency, int pageIndex, int pageSize)
+        public async Task<PagedResult<AddressModel>> ListAddresses(string currency, int pageIndex, int pageSize)
         {
             return await ListAddresses(new ListAddressesRequest()
             {
@@ -314,9 +314,9 @@ namespace SouthXchange
         /// Lists addresses for a specific currency. Permission required: Generate New Address
         /// </summary>
         /// <returns><typeparamref name="PagedResult"/> of addresses</returns>
-        public async Task<PagedResult<string>> ListAddresses(ListAddressesRequest listAddressesRequest)
+        public async Task<PagedResult<AddressModel>> ListAddresses(ListAddressesRequest listAddressesRequest)
         {
-            return await PostAsync<PagedResult<string>>("listaddresses", listAddressesRequest);
+            return await PostAsync<PagedResult<AddressModel>>("listaddresses", listAddressesRequest);
         }
 
         /// <summary>

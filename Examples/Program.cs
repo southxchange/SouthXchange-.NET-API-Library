@@ -73,7 +73,7 @@ namespace Examples
             // Generate new address
             var address = await context.GenerateNewAddressAsync(currency);
             
-            Console.WriteLine(address);
+            Console.WriteLine(address?.Address);
             
             // Withdraw
             // await context.WithdrawAsync(currency, address, DestinationType.CryptoAddress, currencyBalance.Available);
