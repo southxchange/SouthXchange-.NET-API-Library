@@ -166,6 +166,17 @@ namespace SouthXchange
             return await GetAsync<FeesResult>("fees");
         }
 
+        /// <summary>
+        /// Gives the status of all wallets
+        /// </summary>
+        /// <returns>
+        /// <typeparamref name="WalletInfo"/>
+        /// </returns>
+        public async Task<WalletInfo> GetWallets()
+        {
+            return await GetAsync<WalletInfo>("wallets");
+        }
+
         #endregion
 
         #region Private API
