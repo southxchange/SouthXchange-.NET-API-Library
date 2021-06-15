@@ -21,13 +21,13 @@ namespace SouthXchange.Model
         /// Wallet status
         /// </summary>
         [JsonProperty("Status")]
-        public WalletStatus Status { get; set; }
+        public string Status { get; set; }
 
         /// <summary>
         /// Payment Method
         /// </summary>
         [JsonProperty("Type")]
-        public PaymentMethod Type { get; set; }
+        public string Type { get; set; }
 
         /// <summary>
         /// Last block on the blockchain
