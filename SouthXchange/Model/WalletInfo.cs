@@ -14,8 +14,8 @@ namespace SouthXchange.Model
         /// <summary>
         /// Last time checked
         /// </summary>
-        [JsonProperty("Date")]
-        public DateTime Date { get; set; }
+        [JsonProperty("LastUpdate")]
+        public DateTime LastUpdate { get; set; }
 
         /// <summary>
         /// Wallet status
