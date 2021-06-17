@@ -172,9 +172,9 @@ namespace SouthXchange
         /// <returns>
         /// <typeparamref name="WalletInfo"/>
         /// </returns>
-        public async Task<WalletInfo> GetWallets()
+        public async Task<WalletInfo[]> GetWallets()
         {
-            return await GetAsync<WalletInfo>("wallets");
+            return await GetAsync<WalletInfo[]>("wallets");
         }
 
         #endregion

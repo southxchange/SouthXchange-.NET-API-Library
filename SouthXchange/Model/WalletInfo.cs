@@ -51,6 +51,6 @@ namespace SouthXchange.Model
         /// Required number of confirmations
         /// </summary>
         [JsonProperty("RequiredConfirmations")]
-        public int RequiredConfirmations { get; set; }
+        public int? RequiredConfirmations { get; set; }
     }
 }

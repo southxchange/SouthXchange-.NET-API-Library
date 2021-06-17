@@ -44,8 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\PaymentMethod.cs" />
-    <Compile Include="Model\WalletStatus.cs" />
     <Compile Include="Model\WalletInfo.cs" />
     <Compile Include="Model\FeesResult.cs" />
     <Compile Include="Model\AddressModel.cs" />
