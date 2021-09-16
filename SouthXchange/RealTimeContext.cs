@@ -36,6 +36,8 @@ namespace SouthXchange
         public event EventHandler<MarketBook> OnMarketBook;
         public event EventHandler<BookDeltaItem> OnBookDeltaItem;
         public event EventHandler<Trade> OnTrade;
+        public event EventHandler<Order> OnOrder;
+        public event EventHandler<Order> OnAllOrders;
 
         #endregion
 
@@ -66,7 +68,7 @@ namespace SouthXchange
 
         #region Public Methods
 
-        public void Connect()
+        public void Connect(string token = null)
         {
             if (webSocket != null 
                 && webSocket.State == WebSocketState.Open)
@@ -77,7 +79,8 @@ namespace SouthXchange
             {
                 webSocket = new ClientWebSocket();
                 webSocket.Options.KeepAliveInterval = TimeSpan.FromSeconds(20);
-                webSocket.ConnectAsync(new Uri(baseUri, "connect"), CancellationToken.None).GetAwaiter().GetResult();
+                var uri = new Uri(baseUri, string.IsNullOrEmpty(token) ? "connect" : $"connect?token={token}");
+                webSocket.ConnectAsync(uri, CancellationToken.None).GetAwaiter().GetResult();
                 OnConnected?.Invoke(this, new EventArgs());
                 StartSending(webSocket);
                 StartReceiving(webSocket);
@@ -229,6 +232,18 @@ namespace SouthXchange
                                 OnTrade?.Invoke(this, new EventArgs<Trade>()
                                 {
                                     Data = messageValueToken.ToObject<Trade[]>()
+                                });
+                                break;
+                            case "allorders":
+                                OnAllOrders?.Invoke(this, new EventArgs<Order>()
+                                {
+                                    Data = messageValueToken.ToObject<Order[]>()
+                                }); 
+                                break;
+                            case "order":
+                                OnOrder?.Invoke(this, new EventArgs<Order>()
+                                {
+                                    Data = messageValueToken.ToObject<Order[]>()
                                 });
                                 break;
                         }

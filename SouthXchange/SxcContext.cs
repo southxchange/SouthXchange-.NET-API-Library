@@ -219,16 +219,16 @@ namespace SouthXchange
         }
 
         /// <summary>
-        /// Cancels a given order. Permission required: Cancel Order
+        /// Cancels the given orders. Permission required: Cancel Order
         /// </summary>
-        /// <param name="orderCode">Order code to cancel</param>
-        public async Task CancelOrderAsync(string orderCode)
+        /// <param name="orderCodes">Order codes to cancel</param>
+        public async Task CancelOrderAsync(params string[] orderCodes)
         {
             await PostAsync<string>(
-                "cancelOrder",
-                new CancelOrderRequest()
+                "cancelOrders",
+                new CancelOrdersRequest()
                 {
-                    OrderCode = orderCode
+                    OrderCodes = orderCodes
                 });
         }
 
@@ -435,6 +435,17 @@ namespace SouthXchange
         public async Task<UserInfo> GetUserInfoAsync()
         {
             return await PostAsync<UserInfo>("getUserInfo");
+        }
+
+        /// <summary>
+        /// Gets the token for private web socket data. Permission required: List Orders and List Balances
+        /// </summary>
+        /// <returns>
+        /// The token
+        /// </returns>
+        public async Task<string> GetWebSocketToken()
+        {
+            return await PostAsync<string>("getWebSocketToken");
         }
 
         #endregion

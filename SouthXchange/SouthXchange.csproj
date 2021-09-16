@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\CancelOrderRequest.cs" />
+    <Compile Include="Model\CancelOrdersRequest.cs" />
+    <Compile Include="Model\Messages\Order.cs" />
     <Compile Include="Model\WalletInfo.cs" />
     <Compile Include="Model\FeesResult.cs" />
     <Compile Include="Model\AddressModel.cs" />
@@ -68,7 +71,6 @@
     <Compile Include="Model\PagedResult.cs" />
     <Compile Include="Model\ListTransactionsResult.cs" />
     <Compile Include="Model\TradeResult.cs" />
-    <Compile Include="Model\CancelOrderRequest.cs" />
     <Compile Include="Model\BookResult.cs" />
     <Compile Include="Model\PriceResult.cs" />
     <Compile Include="Model\ListOrdersResult.cs" />
