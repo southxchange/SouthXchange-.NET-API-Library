@@ -448,6 +448,23 @@ namespace SouthXchange
             return await PostAsync<string>("getWebSocketToken");
         }
 
+        /// <summary>
+        /// Lists callbacks. Permission required: Get Info
+        /// </summary>
+        /// <returns>Array of <typeparamref name="ListCallbacksResult"/></returns>
+        public async Task<PagedResult<ListCallbacksResult>> ListCallbacksAsync(ListCallbacksRequest listCallbacksRequest)
+        {
+            return await PostAsync<PagedResult<ListCallbacksResult>>("listCallbacks", listCallbacksRequest);
+        }
+
+        /// <summary>
+        /// Creates a callback. Permission required: Get Orders / Get Balance
+        /// </summary>
+        public async Task CreateCallbacksAsync(CreateCallbackRequest createCallbackRequest)
+        {
+            await PostAsync<PagedResult<ListCallbacksResult>>("createCallback", createCallbackRequest);
+        }
+
         #endregion
 
         #endregion
