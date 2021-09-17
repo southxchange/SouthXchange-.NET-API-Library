@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Model\CancelOrderRequest.cs" />
     <Compile Include="Model\CancelOrdersRequest.cs" />
+    <Compile Include="Model\DeleteCallbackRequest.cs" />
     <Compile Include="Model\CreateCallbackRequest.cs" />
     <Compile Include="Model\ListCallbacksResult.cs" />
     <Compile Include="Model\Messages\Order.cs" />

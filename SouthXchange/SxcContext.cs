@@ -462,7 +462,15 @@ namespace SouthXchange
         /// </summary>
         public async Task CreateCallbacksAsync(CreateCallbackRequest createCallbackRequest)
         {
-            await PostAsync<PagedResult<ListCallbacksResult>>("createCallback", createCallbackRequest);
+            await PostAsync<string>("createCallback", createCallbackRequest);
+        }
+
+        /// <summary>
+        /// Deletes a callback. Permission required: Get Orders / Get Balance
+        /// </summary>
+        public async Task DeleteCallbacksAsync(long id)
+        {
+            await PostAsync<string>("deleteCallback", new DeleteCallbackRequest() { Id = id });
         }
 
         #endregion
