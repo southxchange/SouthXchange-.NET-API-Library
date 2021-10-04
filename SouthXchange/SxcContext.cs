@@ -372,14 +372,15 @@ namespace SouthXchange
         /// </param>
         /// <param name="amount">Amount to withdraw. Destination address will receive this amount minus fees</param>
         /// <returns><typeparamref name="WithdrawResult"/></returns>
-        public async Task<WithdrawResult> WithdrawAsync(string currency, string destination, DestinationType destinationType, decimal amount)
+        public async Task<WithdrawResult> WithdrawAsync(string currency, string destination, DestinationType destinationType, decimal amount, string tag)
         {
             return await WithdrawAsync(new WithdrawRequest()
             {
                 Currency = currency,
                 Destination = destination,
                 DestinationType = destinationType,
-                Amount = amount
+                Amount = amount,
+                Tag = tag
             });
         }
 
