@@ -33,7 +33,7 @@ namespace SouthXchange.Model
         /// <summary>
         /// Custom tag to identify the origin of the withdraw
         /// </summary>
-        [JsonProperty("tag")]
-        public string Tag { get; set; }
+        [JsonProperty("paymentId")]
+        public string PaymentId { get; set; }
     }
 }
