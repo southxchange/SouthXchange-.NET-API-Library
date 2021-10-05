@@ -29,5 +29,11 @@ namespace SouthXchange.Model
         /// </summary>
         [JsonProperty("amount")]
         public decimal Amount { get; set; }
+
+        /// <summary>
+        /// Custom tag to identify the origin of the withdraw
+        /// </summary>
+        [JsonProperty("paymentId")]
+        public string PaymentId { get; set; }
     }
 }
