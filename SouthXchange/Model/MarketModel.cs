@@ -38,6 +38,6 @@ namespace SouthXchange.Model
         /// The price precision
         /// </summary>
         [JsonProperty("pricePrecision")]
-        public byte PricePrecision { get; set; }
+        public byte? PricePrecision { get; set; }
     }
 }
