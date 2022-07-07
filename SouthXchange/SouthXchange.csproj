@@ -51,6 +51,8 @@
     <Compile Include="Model\ListCallbacksResult.cs" />
     <Compile Include="Model\Messages\Order.cs" />
     <Compile Include="Model\ListCallbacksRequest.cs" />
+    <Compile Include="Model\OrdersRequest.cs" />
+    <Compile Include="Model\OrdersResult.cs" />
     <Compile Include="Model\WalletInfo.cs" />
     <Compile Include="Model\FeesResult.cs" />
     <Compile Include="Model\AddressModel.cs" />

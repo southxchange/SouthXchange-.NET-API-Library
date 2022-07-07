@@ -5,13 +5,13 @@ namespace SouthXchange.Model
     public class PagedRequest : Request
     {
         /// <summary>
-        /// Page index (0-based)
+        /// Page index
         /// </summary>
         [JsonProperty("pageIndex")]
         public int PageIndex { get; set; }
 
         /// <summary>
-        /// Page size
+        /// Page size. Maximum: 50
         /// </summary>
         [JsonProperty("pageSize")]
         public int PageSize { get; set; }
