@@ -289,6 +289,17 @@ namespace SouthXchange
                 });
         }
 
+        public async Task<OrdersResult[]> GetOrdersAsync(string[] code, int pageIndex, int pageSize)
+        {
+            return await PostAsync<OrdersResult[]>(
+                "getOrders", new OrdersRequest()
+                {
+                    Code = code,
+                    PageIndex = pageIndex,
+                    PageSize = pageSize
+                });
+        }
+
         /// <summary>
         /// Generates a new address for a given cryptocurrency. Permission required: Generate New Address
         /// </summary>

@@ -37,10 +37,17 @@ namespace SouthXchange.Model
         }
 
         /// <summary>
-        /// Amount in listing currency
+        /// Pending Amount in listing currency
+        /// </summary>
+        [JsonProperty("PendingAmount")]
+        public decimal PendingAmount { get; set; }
+
+        /// <summary>
+        /// Original Order Amount in listing currency
         /// </summary>
         [JsonProperty("Amount")]
         public decimal Amount { get; set; }
+
 
         /// <summary>
         /// Order price in reference currency

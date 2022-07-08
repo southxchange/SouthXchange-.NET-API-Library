@@ -2,7 +2,7 @@
 
 namespace SouthXchange.Model
 {
-    public class ListOrdersResult : SxcModel
+    public class OrdersResult : SxcModel
     {
         /// <summary>
         /// Order code
@@ -22,7 +22,7 @@ namespace SouthXchange.Model
         [JsonIgnore]
         public OrderType Type
         {
-            get 
+            get
             {
                 return TypeString == "buy"
                     ? OrderType.Buy
@@ -37,22 +37,23 @@ namespace SouthXchange.Model
         }
 
         /// <summary>
-        /// Pending amount in listing currency
+        /// Pending Amount in listing currency
+        /// </summary>
+        [JsonProperty("PendingAmount")]
+        public decimal PendingAmount { get; set; }
+
+        /// <summary>
+        /// Original Order Amount in listing currency
         /// </summary>
         [JsonProperty("Amount")]
         public decimal Amount { get; set; }
 
-        /// <summary>
-        /// Original amount in listing currency
-        /// </summary>
-        [JsonProperty("OriginalAmount")]
-        public decimal OriginalAmount { get; set; }
 
         /// <summary>
         /// Order price in reference currency
         /// </summary>
         [JsonProperty("LimitPrice")]
-        public decimal LimitPrice { get; set; }
+        public decimal? LimitPrice { get; set; }
 
         /// <summary>
         /// Market listing currency
@@ -65,6 +66,12 @@ namespace SouthXchange.Model
         /// </summary>
         [JsonProperty("ReferenceCurrency")]
         public string ReferenceCurrency { get; set; }
+
+        /// <summary>
+        /// Status of the order
+        /// </summary>
+        [JsonProperty("Status")]
+        public string Status { get; set; }
 
         /// <summary>
         /// Order creation date
