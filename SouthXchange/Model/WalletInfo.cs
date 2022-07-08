@@ -12,6 +12,12 @@ namespace SouthXchange.Model
         public string Currency { get; set; }
 
         /// <summary>
+        /// Currrency Name
+        /// </summary>
+        [JsonProperty("CurrencyName")]
+        public string CurrencyName { get; set; }
+
+        /// <summary>
         /// Last time checked
         /// </summary>
         [JsonProperty("LastUpdate")]
