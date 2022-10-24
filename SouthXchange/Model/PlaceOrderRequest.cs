@@ -35,6 +35,11 @@ namespace SouthXchange.Model
                     : "sell";
             }
         }
+        /// <summary>
+        /// Order Execution type. Posible values GTC, FOK
+        /// </summary>
+        [JsonProperty("ordertype")]
+        public OrderExcecutionType OrdersExecutionType { get; set; } = OrderExcecutionType.GTC;
 
         /// <summary>
         /// Order amount
