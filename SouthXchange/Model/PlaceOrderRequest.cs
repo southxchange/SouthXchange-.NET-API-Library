@@ -39,7 +39,7 @@ namespace SouthXchange.Model
         /// Order Execution type. Posible values GTC, FOK
         /// </summary>
         [JsonProperty("ordertype")]
-        public OrderExcecutionType OrdersExecutionType { get; set; } = OrderExcecutionType.GTC;
+        public OrderExcecutionType OrderExecutionType { get; set; } = OrderExcecutionType.GTC;
 
         /// <summary>
         /// Order amount
